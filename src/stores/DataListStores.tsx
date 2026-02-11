@@ -9,6 +9,8 @@ type DataListState = {
   setNumber: (newNumber: number) => void;
   // data: Data;
   // setData: (patch: Partial<Data>) => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 };
 
 export const useDataListStore = create<DataListState>((set) => ({
@@ -16,6 +18,8 @@ export const useDataListStore = create<DataListState>((set) => ({
   setValue: (newValue: string) => set({ value: newValue }),
   number: 0,
   setNumber: (newNumber: number) => set({ number: newNumber }),
+  loading: false,
+  setLoading: (loading: boolean) => set({ loading }),
 
   // data: { value: '', number: 0 },
   // setData: (patch) =>

@@ -6,6 +6,7 @@ function SetterPage() {
   const navigate = useNavigate();
   const setValue = useDataListStore((state) => state.setValue);
   const setNumber = useDataListStore((state) => state.setNumber);
+  const setLoading = useDataListStore((state) => state.setLoading);
 
   const [inputValue, setInputValue] = useState('');
   const [inputNumber, setInputNumber] = useState(0);
@@ -19,6 +20,11 @@ function SetterPage() {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
     setValue(inputValue);
     setNumber(inputNumber);
     navigate('/');
