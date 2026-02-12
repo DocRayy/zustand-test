@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { useDataListStore } from '../../stores/DataListStores';
 
 function HomePage() {
-  const value = useDataListStore((state) => state.value);
-  const number = useDataListStore((state) => state.number);
+  const dataList = useDataListStore((state) => state.dataList);
+  const deleteData = useDataListStore((state) => state.deleteData);
   const numbers = [10, 20, 30, 40, 50];
 
   const mappedNumbers = numbers.map((num) => num * 2);
@@ -19,9 +19,40 @@ function HomePage() {
     <main className="p-4">
       <div className='flex flex-col gap-4'>
         <h1>Home Page</h1>
-        <p>Value: {value || '-'}</p>
-        <p>Number: {number || '-'}</p>
-        <Link className='bg-blue-900 p-2 w-[200px] text-center text-white' to="/set">Go to Setter</Link>
+        <h2 className="text-lg font-semibold">Data Getter</h2>
+        {dataList.length === 0 ? (
+          <p>Belum ada data.</p>
+        ) : (
+          <div className='flex flex-col gap-2'>
+            {dataList.map((item) => (
+              <div key={item.id} className='border border-gray-300 rounded p-3 flex items-center justify-between'>
+                <div>
+                  <p>ID: {item.id}</p>
+                  <p>Value: {item.value || '-'}</p>
+                  <p>Number: {item.number}</p>
+                </div>
+                <div className='flex gap-2'>
+                  <Link className='bg-emerald-700 p-2 w-[140px] text-center text-white' to={`/set/${item.id}`}>
+                    Edit Data
+                  </Link>
+                  <button
+                    type="button"
+                    className='bg-red-700 p-2 w-[140px] text-center text-white'
+                    onClick={() => deleteData(item.id)}
+                  >
+                    Hapus
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className='flex gap-3'>
+          <Link className='bg-blue-900 p-2 w-[200px] text-center text-white' to="/set">
+            Go to Setter
+          </Link>
+        </div>
       </div>
 
       <div className="mt-6 gap-12">

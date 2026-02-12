@@ -9,7 +9,10 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/set" element={<SetterPage />} />
+        <Route path="/set">
+          <Route index element={<SetterPage />} />
+          <Route path=":id" element={<SetterPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
