@@ -2,6 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/header';
 import HomePage from './routes/home';
 import SetterPage from './routes/setter';
+import SetterDetailPage from './routes/setter/setterdetail';
+import SetterListPage from './routes/setter/setterlistpage';
+import { SETTER_PATH } from './routes/setter/constants';
 
 function App() {
   return (
@@ -9,9 +12,11 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/set">
-          <Route index element={<SetterPage />} />
-          <Route path=":id" element={<SetterPage />} />
+        
+        <Route path={SETTER_PATH} element={<SetterPage />}>
+          <Route index element={<SetterListPage />} />
+          <Route path="new" element={<SetterDetailPage />} />
+          <Route path=":id" element={<SetterDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
